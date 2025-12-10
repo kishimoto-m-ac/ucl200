@@ -1,4 +1,4 @@
-name: Build and publish to GitHub Pages
+name: Build and deploy to gh-pages
 
 on:
   push:
@@ -6,12 +6,10 @@ on:
       - main
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 jobs:
-  build_and_upload:
+  build_and_deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -28,18 +26,13 @@ jobs:
       - name: Build (Vite)
         run: npm run build
 
-      - name: Configure GitHub Pages
-        uses: actions/configure-pages@v3
-
-      # ← ここを更新します（例: @v1 → @v2）
-      - name: Upload artifact (dist)
-        uses: actions/upload-pages-artifact@v2
+      - name: Deploy to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          path: ./dist
-
-  deploy:
-    needs: build_and_upload
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v1
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: gh-pages
+          # 以下は任意の設定
+          user_name: github-actions
+          user_email: github-actions@github.com
+          allow_empty_commit: true
