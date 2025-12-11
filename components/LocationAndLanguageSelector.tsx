@@ -1,14 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Language } from '../types';
 import { translations } from '../constants/translations';
 
 const LocationAndLanguageSelector: React.FC = () => {
-  // const [language, setLanguage] = useState<Language>('en');
-  const initialLang = (typeof window !== 'undefined' && (window as any).__DEFAULT_LANGUAGE) ? (window as any).__DEFAULT_LANGUAGE as Language : 'en'; const [language, setLanguage] = useState<Language>(initialLang);
+  // デフォルトは 'en'。マウント後に window.__DEFAULT_LANGUAGE があれば上書きする（確実な初期化手法）。
+  const [language, setLanguage] = useState<Language>('en');
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && (window as any).__DEFAULT_LANGUAGE) {
+      const lang = (window as any).__DEFAULT_LANGUAGE as Language;
+      if (lang === 'ja' || lang === 'en') {
+        setLanguage(lang);
+      }
+    }
+  }, []);
+
   const t = translations[language];
 
   const handleStartChat = () => {
-    // Redirect to the language-specific page on GitHub Pages
     const base = 'https://maki-kishimoto.github.io/ucl200';
     const path = language === 'ja' ? '/ja' : '/en';
     window.location.href = `${base}${path}`;
