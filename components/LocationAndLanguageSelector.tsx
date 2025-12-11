@@ -8,9 +8,10 @@ const LocationAndLanguageSelector: React.FC = () => {
   const t = translations[language];
 
   const handleStartChat = () => {
-    // Redirect to the external website
-    // window.location.href = 'https://kishimoto-m-ac.github.io/website/';
-    window.location.href = 'https://copy-of-choshu-five-spirits-1210-18450264775.us-west1.run.app';
+    // Redirect to the language-specific page on GitHub Pages
+    const base = 'https://maki-kishimoto.github.io/ucl200';
+    const path = language === 'ja' ? '/ja' : '/en';
+    window.location.href = `${base}${path}`;
   };
   
   return (
@@ -33,14 +34,14 @@ const LocationAndLanguageSelector: React.FC = () => {
                 <div className="flex justify-center items-center gap-8">
                     <button 
                         onClick={() => setLanguage('en')} 
-                        className={`text-sm tracking-wide transition-all duration-300 pb-1 border-b ${language === 'en' ? 'text-indigo-900 font-bold border-indigo-900' : 'text-stone-400 font-medium border-transparent hover:text-stone-600 hover:border-stone-300'}`}
+                        className={`text-sm tracking-wide transition-all duration-300 pb-1 border-b ${language === 'en' ? 'text-indigo-900 font-bold border-indigo-900' : 'text-stone-400 font-medium border-transparent'}`}
                     >
                         English
                     </button>
                     <span className="text-stone-300 text-sm font-light">|</span>
                     <button 
                         onClick={() => setLanguage('ja')} 
-                        className={`text-sm tracking-wide transition-all duration-300 pb-1 border-b ${language === 'ja' ? 'text-indigo-900 font-bold border-indigo-900' : 'text-stone-400 font-medium border-transparent hover:text-stone-600 hover:border-stone-300'}`}
+                        className={`text-sm tracking-wide transition-all duration-300 pb-1 border-b ${language === 'ja' ? 'text-indigo-900 font-bold border-indigo-900' : 'text-stone-400 font-medium border-transparent'}`}
                     >
                         日本語
                     </button>
@@ -48,7 +49,7 @@ const LocationAndLanguageSelector: React.FC = () => {
 
                 <button
                     onClick={handleStartChat}
-                    className="w-full bg-indigo-900 text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:bg-indigo-800 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2 group"
+                    className="w-full bg-indigo-900 text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:bg-indigo-800 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-3 group"
                 >
                     <span>{t.startChat}</span>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
