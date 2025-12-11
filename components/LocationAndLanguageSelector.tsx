@@ -9,7 +9,8 @@ const LocationAndLanguageSelector: React.FC = () => {
 
   const handleStartChat = () => {
     // Redirect to the external website
-    window.location.href = 'https://kishimoto-m-ac.github.io/website/';
+    // window.location.href = 'https://kishimoto-m-ac.github.io/website/';
+    window.location.href = 'https://copy-of-choshu-five-spirits-1210-18450264775.us-west1.run.app';
   };
   
   return (
